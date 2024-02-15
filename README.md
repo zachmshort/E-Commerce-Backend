@@ -13,3 +13,5 @@ This is a simple e-commerce backend built with Node.js, Express, and MySQL. It a
 
 node server.js
 copy link into insomnia and query different routes
+
+[Demo](https://www.loom.com/share/e3e5a7085f5e416982a39506ddf22ece)
