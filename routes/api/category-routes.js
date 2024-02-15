@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
     const catData = await Category.findAll({
     include: [{ model: Product }],
   });
-    res.json(categories);
+    res.json(catData);
   } catch(err) {
     console.error(err);
     res.status(500).json(err);
@@ -24,12 +24,12 @@ router.get('/:id', async (req, res) => {
     const catId = await Category.findByPk(req.params.id, {
     include: [{ model: Product }],
   }); 
-    if (!category) {
+    if (!catId) {
       res.status(404).json({ message: 'Category not found' });
       return;
     }
 
-    res.json(category);
+    res.json(catId);
   } catch (err) {
     console.error(err);
     res.status(500).json(err);
@@ -67,20 +67,19 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   // delete a category by its `id` value
+  try {
   Category.destroy({
     where: { id: req.params.id },
-  })
-  .then((category) => {
+  });
     if (!category) {
       res.status(404).json({ message: 'Category not found' });
       return;
     }
     res.json({ message: 'Category deleted' });
-  })
-  .catch((err) => {
+  } catch(err) {
     console.error(err);
     res.status(500).json(err);
-  });
+  };
 });
 
 module.exports = router;
